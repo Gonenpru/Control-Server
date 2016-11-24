@@ -15,14 +15,23 @@ public class DBConnection {
 	private void createConnection(){
 		try {
 			Class.forName("org.postgresql.Driver");
-			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/gonenpru","postgres", "123");
-			connection.close();	
+			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/gonenpru","postgres", "1234");
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
 			
 	}
+	
+	public void closeConnection(){
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+	}
 
-
-
+	public Connection getConnection() {
+		return connection;
+	}
+	
 }
