@@ -18,14 +18,25 @@ public class PlanesDynamicList implements Runnable{
 
 	@Override
 	public void run() {
-		for(int i = 0; i < planes.size() ; i++){
-			if(planes.get(i).isHandled()){
-				planeUpdaters.add(new PlaneUpdater(planes.get(i)));
-				threads.add(new Thread(planeUpdaters.get(i)));
+		while(true){
+			for(int i = 0; i < planes.size() ; i++){
+				if(!planes.get(i).isHandled()){
+					planeUpdaters.add(new PlaneUpdater(planes.get(i)));
+					threads.add(new Thread(planeUpdaters.get(i)));
+				}
+			}
+
+			try {
+				wait(60000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+			if(planes.size() > 9999){
+				break;
 			}
 		}
-		
-		
+
 	}
 
 }
