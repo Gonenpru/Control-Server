@@ -10,6 +10,7 @@ public class Plane {
 	private String manufacturer;
 	private int maxPass;
 	private int passengers;
+	private boolean handled = false;
 	
 	public Plane(int planeId, int airlineId, String airline, String model, String manufacturer, int maxPass, int passengers){
 		this.planeId = planeId;
@@ -86,6 +87,10 @@ public class Plane {
 
 	public void setPassengers(int passengers) {
 		this.passengers = passengers;
+	}
+	
+	public boolean isHandled(){
+		return this.handled;
 	}
 	
 	
