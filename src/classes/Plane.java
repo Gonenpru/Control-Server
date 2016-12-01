@@ -10,9 +10,10 @@ public class Plane {
 	private String manufacturer;
 	private int maxPass;
 	private int passengers;
+	private int terminal; 
 	private boolean handled = false;
 	
-	public Plane(int planeId, int airlineId, String airline, String model, String manufacturer, int maxPass, int passengers){
+	public Plane(int planeId, int airlineId, String airline, String model, String manufacturer, int maxPass, int passengers, int terminal){
 		this.planeId = planeId;
 		this.airlineId = airlineId;
 		this.state = new State();
@@ -22,7 +23,7 @@ public class Plane {
 		this.manufacturer = manufacturer;
 		this.maxPass = maxPass;
 		this.passengers = passengers;
-	
+		this.terminal = terminal;
 	}
 
 	public int getPlaneId() {
@@ -91,6 +92,14 @@ public class Plane {
 	
 	public boolean isHandled(){
 		return this.handled;
+	}
+
+	public int getTerminal() {
+		return terminal;
+	}
+
+	public void setTerminal(int terminal) {
+		this.terminal = terminal;
 	}
 	
 	
