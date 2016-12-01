@@ -58,11 +58,10 @@ public class Main {
 		LOCK.lock();
 		while (!landingLane) {
 			System.out.println("Avion esperando a aterrizar: " + plane.getId());
-			LOCK.lock();
+			
 			landingLaneLock.await();
-			LOCK.unlock();
+			
 		}
-
 		// EN PISTA
 		i--;
 		landingLane = false;
@@ -93,12 +92,14 @@ public class Main {
 		esperaAterrizaje = false;
 		System.out.println("Espera Aterrizaje : " + plane.getId());
 
+		LOCK.lock();
 		while (!p1_libre) {
 			System.out.println("Esperando en p1 : id -> " + plane.getId());
-			LOCK.lock();
+			
 			p1.await();
-			LOCK.unlock();
+			
 		}
+		LOCK.unlock();
 
 		// ESPERA ATERRIZAJE LIBRE
 		esperaAterrizaje = true;
