@@ -1,4 +1,4 @@
-package Prueba;
+package prueba;
 
 public class Plane {
 
