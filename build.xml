@@ -84,4 +84,10 @@
             <report format="frames" todir="${junit.output.dir}"/>
         </junitreport>
     </target>
+         <target name="test">
+            		<echo message="Compiling source code" />
+            	</target>
+            	<target name="deps" depends="build">
+            		<echo message="Dependencies" />
+            	</target>
 </project>
