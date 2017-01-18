@@ -27,10 +27,10 @@ public class Launcher {
 	private Random rnd;
 
 	public static void main(String[] args) {
-		new Launcher();
+		new Launcher(9);
 	}
 
-	public Launcher() {
+	public Launcher(int planeAmmount) {
 		threadPool = Executors.newCachedThreadPool();
 
 		try {
@@ -38,10 +38,11 @@ public class Launcher {
 			session = HibernateUtils.getSessionFactory().openSession();
 			PLANE_MOVEMENTS = new HashMap<>();
 			rnd = new Random();
-			for (int i = 1; i < 10; i++){
+			for (int i = 1; i <= planeAmmount; i++){
 				threadPool.submit(new Thread(new Planes(i, 0, 0, 0)));
 				Thread.sleep((rnd.nextInt(10)+11)*1000);
 			}
+			threadPool.shutdown();
 			while (!threadPool.isTerminated()) {
 			}
 
