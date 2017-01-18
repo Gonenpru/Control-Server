@@ -1,6 +1,7 @@
 package threads;
 
 import java.util.HashMap;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
@@ -22,6 +23,8 @@ public class Launcher {
 	public static int AIRPORT_PLANES;
 	public static Session session;
 	public static ExecutorService threadPool;
+	
+	private Random rnd;
 
 	public static void main(String[] args) {
 		new Launcher();
@@ -34,15 +37,12 @@ public class Launcher {
 			HibernateUtils.start();
 			session = HibernateUtils.getSessionFactory().openSession();
 			PLANE_MOVEMENTS = new HashMap<>();
-			threadPool.submit(new Thread(new Planes(1, 0, 0, 0)));
-			threadPool.submit(new Thread(new Planes(2, 0, 0, 0)));
-			threadPool.submit(new Thread(new Planes(3, 0, 0, 0)));
-			threadPool.submit(new Thread(new Planes(4, 0, 0, 0)));
-			threadPool.submit(new Thread(new Planes(5, 0, 0, 0)));
-			threadPool.submit(new Thread(new Planes(6, 0, 0, 0)));
-			threadPool.submit(new Thread(new Planes(7, 0, 0, 0)));
-			threadPool.submit(new Thread(new Planes(8, 0, 0, 0)));
-			threadPool.submit(new Thread(new Planes(9, 0, 0, 0)));
+			rnd = new Random();
+			for (int i = 1; i < 10; i++){
+				threadPool.submit(new Thread(new Planes(i, 0, 0, 0)));
+				
+				Thread.sleep((rnd.nextInt(10)+11)*1000);
+			}
 			while (!threadPool.isTerminated()) {
 			}
 
