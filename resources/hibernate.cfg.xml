@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.password"></property>
+        <property name="hibernate.connection.url">jdbc:postgresql://51.254.216.116:5432/gonenpru</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.show_sql">true</property>
+        
+        <mapping class="db_items.Airlines" package="db_items" resource="/db_items.Airlines.hbm.xml"/>
+        <mapping class="db_items.Baggages" package="db_items" resource="/db_items.Baggages.hbm.xml"/>
+        <mapping class="db_items.Controllers" package="db_items" resource="/db_items.Controllers.hbm.xml"/>
+        <mapping class="db_items.Employees" package="db_items" resource="/db_items.Employees.hbm.xml"/>
+        <mapping class="db_items.Flights" package="db_items" resource="/db_items.Flights.hbm.xml"/>
+        <mapping class="db_items.Gates" package="db_items" resource="/db_items.Gates.hbm.xml"/>
+        <mapping class="db_items.Manufacturers" package="db_items" resource="/db_items.Manufacturers.hbm.xml"/>
+        <mapping class="db_items.Passengers" package="db_items" resource="/db_items.Passengers.hbm.xml"/>
+        <mapping class="db_items.PlaneModels" package="db_items" resource="/db_items.PlaneModels.hbm.xml"/>
+        <mapping class="db_items.PlaneMovements" package="db_items" resource="/db_items.PlaneMovements.hbm.xml"/>
+        <mapping class="db_items.Planes" package="db_items" resource="/db_items.Planes.hbm.xml"/>
+        <mapping class="db_items.PlaneStatus" package="db_items" resource="/db_items.PlaneStatus.hbm.xml"/>
+        <mapping class="db_items.Routes" package="db_items" resource="/db_items.Routes.hbm.xml"/>
+        <mapping class="db_items.Terminals" package="db_items" resource="/db_items.Terminals.hbm.xml"/>
+        <mapping class="db_items.Tickets" package="db_items" resource="/db_items.Tickets.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>

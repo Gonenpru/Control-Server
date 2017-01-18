@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04-ene-2017 11:51:09 by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping>
+    <class name="db_items.Gates" table="gates" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="terminals" class="db_items.Terminals" fetch="select">
+            <column name="terminal_id" not-null="true" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name" length="45" />
+        </property>
+        <set name="flightses" table="flights" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="gate_id" not-null="true" />
+            </key>
+            <one-to-many class="db_items.Flights" />
+        </set>
+    </class>
+</hibernate-mapping>

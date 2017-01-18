@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04-ene-2017 11:51:09 by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping>
+    <class name="db_items.Flights" table="flights" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="baggages" class="db_items.Baggages" fetch="select">
+            <column name="baggage_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="gates" class="db_items.Gates" fetch="select">
+            <column name="gate_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="planes" class="db_items.Planes" fetch="select">
+            <column name="plane_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="routes" class="db_items.Routes" fetch="select">
+            <column name="route_id" not-null="true" />
+        </many-to-one>
+        <property name="duration" type="date">
+            <column name="duration" />
+        </property>
+        <property name="delay" type="date">
+            <column name="delay" />
+        </property>
+        <property name="dateDeparture" type="timestamp">
+            <column name="date_departure" length="13" />
+        </property>
+
+        <set name="ticketses" table="tickets" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="flight_id" not-null="true" />
+            </key>
+            <one-to-many class="db_items.Tickets" />
+        </set>
+    </class>
+</hibernate-mapping>

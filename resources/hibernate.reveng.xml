@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-schema="public" match-name="airlines"/>
+  <table-filter match-schema="public" match-name="baggages"/>
+  <table-filter match-schema="public" match-name="controllers"/>
+  <table-filter match-schema="public" match-name="employees"/>
+  <table-filter match-schema="public" match-name="flights"/>
+  <table-filter match-schema="public" match-name="gates"/>
+  <table-filter match-schema="public" match-name="manufacturers"/>
+  <table-filter match-schema="public" match-name="passengers"/>
+  <table-filter match-schema="public" match-name="plane_models"/>
+  <table-filter match-schema="public" match-name="plane_movements"/>
+  <table-filter match-schema="public" match-name="plane_status"/>
+  <table-filter match-schema="public" match-name="planes"/>
+  <table-filter match-schema="public" match-name="routes"/>
+  <table-filter match-schema="public" match-name="terminals"/>
+  <table-filter match-schema="public" match-name="tickets"/>
+</hibernate-reverse-engineering>
