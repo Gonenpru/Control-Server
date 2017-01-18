@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04-ene-2017 11:51:09 by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping>
+    <class name="db_items.Tickets" table="tickets" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="flights" class="db_items.Flights" fetch="select">
+            <column name="flight_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="passengers" class="db_items.Passengers" fetch="select">
+            <column name="passenger_id" not-null="true" />
+        </many-to-one>
+        <property name="code" type="string">
+            <column name="code" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

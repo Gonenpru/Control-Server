@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04-ene-2017 11:51:09 by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping>
+    <class name="db_items.Routes" table="routes" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="airlines" class="db_items.Airlines" fetch="select">
+            <column name="airline_id" not-null="true" />
+        </many-to-one>
+        <property name="detination" type="string">
+            <column name="detination" length="45" />
+        </property>
+        <property name="origin" type="string">
+            <column name="origin" length="45" />
+        </property>
+        <property name="departure" type="string">
+            <column name="departure" length="45" />
+        </property>
+        <property name="arrival" type="string">
+            <column name="arrival" length="45" />
+        </property>
+        <set name="flightses" table="flights" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="route_id" not-null="true" />
+            </key>
+            <one-to-many class="db_items.Flights" />
+        </set>
+    </class>
+</hibernate-mapping>
