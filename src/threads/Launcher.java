@@ -40,7 +40,6 @@ public class Launcher {
 			rnd = new Random();
 			for (int i = 1; i < 10; i++){
 				threadPool.submit(new Thread(new Planes(i, 0, 0, 0)));
-				
 				Thread.sleep((rnd.nextInt(10)+11)*1000);
 			}
 			while (!threadPool.isTerminated()) {
