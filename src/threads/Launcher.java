@@ -7,8 +7,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
 
-import org.hibernate.Session;
-
 import db_items.PlaneMovements;
 import db_items.Planes;
 import engine.Enumerated.Sectors;
@@ -20,9 +18,8 @@ public class Launcher {
 	public static HashMap<Enum, Semaphore> SEMAPHORES;
 	public static HashMap<Sectors, Lock> LOCKS;
 	public static HashMap<Integer, PlaneMovements> PLANE_MOVEMENTS;
-	public static int AIRPORT_PLANES;
-	public static Session session;
 	public static ExecutorService threadPool;
+	public static int AIRPORT_PLANES;
 	
 	private Random rnd;
 
@@ -35,7 +32,6 @@ public class Launcher {
 
 		try {
 			HibernateUtils.start();
-			session = HibernateUtils.getSessionFactory().openSession();
 			PLANE_MOVEMENTS = new HashMap<>();
 			rnd = new Random();
 			for (int i = 1; i <= planeAmmount; i++){
@@ -49,7 +45,7 @@ public class Launcher {
 		} catch (Exception e) {
 		} finally {
 			System.out.println("INFO: hibernate closing session");
-			session.close();		
+			HibernateUtils.stop();
 			System.exit(0);
 		}
 	}
