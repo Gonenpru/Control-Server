@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04-ene-2017 11:51:09 by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping>
+    <class name="db_items.PlaneMovements" table="plane_movements" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="planes" class="db_items.Planes" fetch="select">
+            <column name="plane_id" not-null="true" />
+        </many-to-one>
+        <property name="posx" type="double">
+            <column name="posx" />
+        </property>
+        <property name="posy" type="double">
+            <column name="posy" />
+        </property>
+        <property name="out" type="int">
+            <column name="out" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+		<property name="hibernate.connection.password"></property>
+		<property name="hibernate.connection.url">jdbc:postgresql://51.254.216.116:5432/gonenpru</property>
+		<property name="hibernate.connection.username">postgres</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+		<property name="hibernate.show_sql">false</property>
+
+		<mapping class="db_items.PlaneMovements" package="db_items"
+			resource="/db_items.PlaneMovements.hbm.xml" />
+		<mapping class="db_items.Planes" package="db_items"
+			resource="/db_items.Planes.hbm.xml" />
+	</session-factory>
+</hibernate-configuration>
