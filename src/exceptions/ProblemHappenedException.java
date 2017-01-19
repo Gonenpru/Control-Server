@@ -1,6 +1,5 @@
 package exceptions;
 
-import java.io.PrintStream;
 import java.io.PrintWriter;
 
 public class ProblemHappenedException extends Exception {
