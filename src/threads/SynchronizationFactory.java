@@ -22,25 +22,19 @@ public class SynchronizationFactory {
 
 	/** The semaphores. */
 	@SuppressWarnings("rawtypes")
-	public static HashMap<Enum, Semaphore> SEMAPHORES;
+	final public static HashMap<Enum, Semaphore> SEMAPHORES = new HashMap<>();
 	
 	/** The locks. */
-	public static HashMap<Sectors, Lock> LOCKS;
+	final public static HashMap<Sectors, Lock> LOCKS = new HashMap<>();
 	
 	/** The plane movements. */
-	public static HashMap<Integer, PlaneMovements> PLANE_MOVEMENTS;
+	final public static HashMap<Integer, PlaneMovements> PLANE_MOVEMENTS  = new HashMap<>();
 	
 	/**
 	 * Define.
 	 */
 	public static void define() {
-		SynchronizationFactory.LOCKS = new HashMap<>();
-		SynchronizationFactory.LOCKS.put(Sectors.AIRPORT, new ReentrantLock());
-
-		SynchronizationFactory.PLANE_MOVEMENTS = new HashMap<>();
-		
-		SynchronizationFactory.SEMAPHORES = new HashMap<>();
-		
+		SynchronizationFactory.LOCKS.put(Sectors.AIRPORT, new ReentrantLock());		
 		SynchronizationFactory.SEMAPHORES.put(Sectors.AIRPORT, new Semaphore(AirportEngine.MAX_PLANES));
 		
 		SynchronizationFactory.SEMAPHORES.put(Arrival.LANDING_LANE, new Semaphore(1));

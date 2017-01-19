@@ -1,0 +1,5 @@
+projectKey=Control-Server
+serverUrl=http://localhost:9000
+dashboardUrl=http://localhost:9000/dashboard/index/Control-Server
+ceTaskId=AVm4Rdm-RcjZv0hUuoov
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AVm4Rdm-RcjZv0hUuoov

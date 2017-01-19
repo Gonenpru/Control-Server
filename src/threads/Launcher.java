@@ -17,7 +17,7 @@ import utils.HibernateUtils;
 public class Launcher {
 
 	/** The thread pool. */
-	public static ExecutorService threadPool;
+	final public static ExecutorService threadPool = Executors.newCachedThreadPool();
 	
 	/** The rnd. */
 	private Random rnd;
@@ -37,7 +37,6 @@ public class Launcher {
 	 * @param planeAmmount the plane ammount
 	 */
 	public Launcher(int planeAmmount) {
-		threadPool = Executors.newCachedThreadPool();
 		SynchronizationFactory.define();
 		try {
 			HibernateUtils.start();

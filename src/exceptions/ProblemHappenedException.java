@@ -3,7 +3,6 @@
  */
 package exceptions;
 
-import java.io.PrintStream;
 import java.io.PrintWriter;
 
 // TODO: Auto-generated Javadoc
@@ -16,7 +15,7 @@ public class ProblemHappenedException extends Exception {
 	private static final long serialVersionUID = 7068741380739534526L;
 
 	/** The message. */
-	String message;
+	final String message;
 	
 	/**
 	 * Instantiates a new problem happened exception.
