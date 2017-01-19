@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package engine;
 
 import org.hibernate.HibernateException;
@@ -11,10 +14,21 @@ import engine.Enumerated.Terminal;
 import threads.SynchronizationFactory;
 import utils.HibernateUtils;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DepartureManager.
+ */
 public class DepartureManager {
 
+	/** The Constant NONE. */
 	private final static int NONE = 0;
 
+	/**
+	 * Check terminal.
+	 *
+	 * @param plane the plane
+	 * @return true, if successful
+	 */
 	public boolean checkTerminal(Planes plane) {
 		try {
 			switch (plane.getTerminal()) {
@@ -33,6 +47,12 @@ public class DepartureManager {
 		return true;
 	}
 
+	/**
+	 * Terminal 1.
+	 *
+	 * @param plane the plane
+	 * @throws InterruptedException the interrupted exception
+	 */
 	private void terminal1(Planes plane) throws InterruptedException {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		Transaction trans;
@@ -67,6 +87,12 @@ public class DepartureManager {
 		}
 	}
 
+	/**
+	 * Terminal 2.
+	 *
+	 * @param plane the plane
+	 * @throws InterruptedException the interrupted exception
+	 */
 	private void terminal2(Planes plane) throws InterruptedException {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		Transaction trans;
@@ -108,6 +134,12 @@ public class DepartureManager {
 		}
 	}
 
+	/**
+	 * Terminal 3.
+	 *
+	 * @param plane the plane
+	 * @throws InterruptedException the interrupted exception
+	 */
 	private void terminal3(Planes plane) throws InterruptedException {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		Transaction trans;
@@ -151,6 +183,12 @@ public class DepartureManager {
 		}
 	}
 
+	/**
+	 * Terminal 4.
+	 *
+	 * @param plane the plane
+	 * @throws InterruptedException the interrupted exception
+	 */
 	private void terminal4(Planes plane) throws InterruptedException {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		Transaction trans;
@@ -194,6 +232,12 @@ public class DepartureManager {
 		}
 	}
 
+	/**
+	 * Check take off curve.
+	 *
+	 * @param plane the plane
+	 * @return true, if successful
+	 */
 	public boolean checkTakeOffCurve(Planes plane) {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 
@@ -222,6 +266,12 @@ public class DepartureManager {
 		return true;
 	}
 
+	/**
+	 * Check take off lane.
+	 *
+	 * @param plane the plane
+	 * @return true, if successful
+	 */
 	public boolean checkTakeOffLane(Planes plane) {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 
@@ -250,6 +300,12 @@ public class DepartureManager {
 		return true;
 	}
 
+	/**
+	 * Check airport space.
+	 *
+	 * @param plane the plane
+	 * @return true, if successful
+	 */
 	public boolean checkAirportSpace(Planes plane) {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 

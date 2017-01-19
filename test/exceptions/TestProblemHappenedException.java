@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package exceptions;
 
 import org.junit.Before;
@@ -8,10 +11,18 @@ import engine.ArrivalManager;
 import threads.SynchronizationFactory;
 import utils.HibernateUtils;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TestProblemHappenedException.
+ */
 public class TestProblemHappenedException {
 	
+	/** The arrival mananger. */
 	ArrivalManager arrivalMananger;
 	
+	/**
+	 * Inits the test.
+	 */
 	@Before
 	public void initTest(){
 		HibernateUtils.start();
@@ -19,6 +30,9 @@ public class TestProblemHappenedException {
 		arrivalMananger = new ArrivalManager();
 	}
 	
+	/**
+	 * Test problem happened exception.
+	 */
 	@Test(expected=ProblemHappenedException.class)
 	public void testProblemHappenedException(){
 		arrivalMananger.checkAirportSpace(new Planes());

@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package threads;
 
 import java.util.HashMap;
@@ -11,13 +14,25 @@ import engine.Enumerated.Arrival;
 import engine.Enumerated.Departure;
 import engine.Enumerated.Sectors;
 
+// TODO: Auto-generated Javadoc
+/**
+ * A factory for creating Synchronization objects.
+ */
 public class SynchronizationFactory {
 
+	/** The semaphores. */
 	@SuppressWarnings("rawtypes")
 	public static HashMap<Enum, Semaphore> SEMAPHORES;
+	
+	/** The locks. */
 	public static HashMap<Sectors, Lock> LOCKS;
+	
+	/** The plane movements. */
 	public static HashMap<Integer, PlaneMovements> PLANE_MOVEMENTS;
 	
+	/**
+	 * Define.
+	 */
 	public static void define() {
 		SynchronizationFactory.LOCKS = new HashMap<>();
 		SynchronizationFactory.LOCKS.put(Sectors.AIRPORT, new ReentrantLock());
