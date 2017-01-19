@@ -15,7 +15,7 @@ import org.hibernate.Session;
 
 import engine.AirportEngine;
 import engine.Enumerated.Sectors;
-import threads.Launcher;
+import threads.SynchronizationFactory;
 import utils.HibernateUtils;
 
 /**
@@ -107,10 +107,10 @@ public class Planes implements Serializable, Runnable {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		try {
 			if (terminal_id == -1) {
-				Launcher.LOCKS.get(Sectors.AIRPORT).lock();
+				SynchronizationFactory.LOCKS.get(Sectors.AIRPORT).lock();
 				Query query = session.createSQLQuery("select getTerminal(:plane)").setInteger("plane", this.id);
 				terminal_id = Integer.parseInt(query.list().get(0).toString());
-				Launcher.LOCKS.get(Sectors.AIRPORT).unlock();
+				SynchronizationFactory.LOCKS.get(Sectors.AIRPORT).unlock();
 			}
 		} catch (HibernateException e) {
 			e.printStackTrace();

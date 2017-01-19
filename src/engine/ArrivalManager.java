@@ -10,7 +10,8 @@ import db_items.Planes;
 import engine.Enumerated.Arrival;
 import engine.Enumerated.Sectors;
 import engine.Enumerated.Terminal;
-import threads.Launcher;
+import exceptions.ProblemHappenedException;
+import threads.SynchronizationFactory;
 import utils.HibernateUtils;
 
 public class ArrivalManager {
@@ -26,23 +27,21 @@ public class ArrivalManager {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		try {
 			plane.doMovement();
-			if (Launcher.SEMAPHORES.get(Sectors.AIRPORT).availablePermits() == 0)
+			if (SynchronizationFactory.SEMAPHORES.get(Sectors.AIRPORT).availablePermits() == 0)
 				System.out.println("Waiting airport to get free | Plane: " + plane.getId());
-			Launcher.SEMAPHORES.get(Sectors.AIRPORT).acquire();
+			SynchronizationFactory.SEMAPHORES.get(Sectors.AIRPORT).acquire();
 
 			System.out.println("In the airport | Plane: " + plane.getId());
-			Launcher.LOCKS.get(Sectors.AIRPORT).lock();
+			SynchronizationFactory.LOCKS.get(Sectors.AIRPORT).lock();
 			id = movesAction.getLastId();
-			Launcher.PLANE_MOVEMENTS.put(plane.getId(),
+			SynchronizationFactory.PLANE_MOVEMENTS.put(plane.getId(),
 					new PlaneMovements(id, plane.getId(), Arrival.AIRPORT.getX(), Arrival.AIRPORT.getY()));
 			Transaction trans = session.beginTransaction();
-			session.save(Launcher.PLANE_MOVEMENTS.get(plane.getId()));
+			session.save(SynchronizationFactory.PLANE_MOVEMENTS.get(plane.getId()));
 			trans.commit();
-			Launcher.LOCKS.get(Sectors.AIRPORT).unlock();
-		} catch (InterruptedException e) {
+			SynchronizationFactory.LOCKS.get(Sectors.AIRPORT).unlock();
+		} catch (Exception e) {
 			return false;
-		} catch (HibernateException e) {
-			e.printStackTrace();
 		} finally {
 			session.close();
 		}
@@ -53,25 +52,23 @@ public class ArrivalManager {
 	public boolean checkLandingLane(Planes plane) {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		try {
-			if (Launcher.SEMAPHORES.get(Arrival.LANDING_LANE).availablePermits() == 0)
+			if (SynchronizationFactory.SEMAPHORES.get(Arrival.LANDING_LANE).availablePermits() == 0)
 				System.out.println("Waiting landing lane to get free | Plane: " + plane.getId());
-			Launcher.SEMAPHORES.get(Arrival.LANDING_LANE).acquire();
+			SynchronizationFactory.SEMAPHORES.get(Arrival.LANDING_LANE).acquire();
 
 			System.out.println("In landing lane | Plane: " + plane.getId());
 
-			Launcher.LOCKS.get(Sectors.AIRPORT).lock();
-			Launcher.PLANE_MOVEMENTS.get(plane.getId()).setPosx(Arrival.LANDING_LANE.getX());
-			Launcher.PLANE_MOVEMENTS.get(plane.getId()).setPosy(Arrival.LANDING_LANE.getY());
+			SynchronizationFactory.LOCKS.get(Sectors.AIRPORT).lock();
+			SynchronizationFactory.PLANE_MOVEMENTS.get(plane.getId()).setPosx(Arrival.LANDING_LANE.getX());
+			SynchronizationFactory.PLANE_MOVEMENTS.get(plane.getId()).setPosy(Arrival.LANDING_LANE.getY());
 			Transaction trans = session.beginTransaction();
-			session.update(Launcher.PLANE_MOVEMENTS.get(plane.getId()));
+			session.update(SynchronizationFactory.PLANE_MOVEMENTS.get(plane.getId()));
 			trans.commit();
-			Launcher.LOCKS.get(Sectors.AIRPORT).unlock();
+			SynchronizationFactory.LOCKS.get(Sectors.AIRPORT).unlock();
 			plane.doMovement();
 
 		} catch (InterruptedException e) {
 			return false;
-		} catch (HibernateException e) {
-			e.printStackTrace();
 		} finally {
 			session.close();
 		}
@@ -81,25 +78,23 @@ public class ArrivalManager {
 	public boolean checkLandingCurve(Planes plane) {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		try {
-			if (Launcher.SEMAPHORES.get(Arrival.LANDING_CURVE).availablePermits() == 0)
+			if (SynchronizationFactory.SEMAPHORES.get(Arrival.LANDING_CURVE).availablePermits() == 0)
 				System.out.println("Waiting landing curve to get free | Plane: " + plane.getId());
 
-			Launcher.SEMAPHORES.get(Arrival.LANDING_CURVE).acquire();
+			SynchronizationFactory.SEMAPHORES.get(Arrival.LANDING_CURVE).acquire();
 
 			System.out.println("In landing curve | Plane: " + plane.getId());
-			Launcher.LOCKS.get(Sectors.AIRPORT).lock();
-			Launcher.PLANE_MOVEMENTS.get(plane.getId()).setPosx(Arrival.LANDING_CURVE.getX());
-			Launcher.PLANE_MOVEMENTS.get(plane.getId()).setPosy(Arrival.LANDING_CURVE.getY());
+			SynchronizationFactory.LOCKS.get(Sectors.AIRPORT).lock();
+			SynchronizationFactory.PLANE_MOVEMENTS.get(plane.getId()).setPosx(Arrival.LANDING_CURVE.getX());
+			SynchronizationFactory.PLANE_MOVEMENTS.get(plane.getId()).setPosy(Arrival.LANDING_CURVE.getY());
 			Transaction trans = session.beginTransaction();
-			session.update(Launcher.PLANE_MOVEMENTS.get(plane.getId()));
+			session.update(SynchronizationFactory.PLANE_MOVEMENTS.get(plane.getId()));
 			trans.commit();
-			Launcher.LOCKS.get(Sectors.AIRPORT).unlock();
-			Launcher.SEMAPHORES.get(Arrival.LANDING_LANE).release();
+			SynchronizationFactory.LOCKS.get(Sectors.AIRPORT).unlock();
+			SynchronizationFactory.SEMAPHORES.get(Arrival.LANDING_LANE).release();
 			plane.doMovement();
 		} catch (InterruptedException e) {
 			return false;
-		} catch (HibernateException e) {
-			e.printStackTrace();
 		} finally {
 			session.close();
 		}
@@ -110,42 +105,43 @@ public class ArrivalManager {
 		try {
 			System.out.println(
 					"Parking in terminal " + isPlanesTerminal(Arrival.TERMINAL1, plane) + " | Plane: " + plane.getId());
-		} catch (InterruptedException e) {
+		} catch (InterruptedException | ProblemHappenedException  e) {
 			return false;
 		}
 		return true;
 	}
 
-	private int isPlanesTerminal(Arrival currentLane, Planes plane) throws InterruptedException {
+	private int isPlanesTerminal(Arrival currentLane, Planes plane)
+			throws InterruptedException, ProblemHappenedException {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		try {
-			if (Launcher.SEMAPHORES.get(currentLane).availablePermits() == 0)
+			if (SynchronizationFactory.SEMAPHORES.get(currentLane).availablePermits() == 0)
 				System.out.println("Waiting " + currentLane + " to get free | Plane: " + plane.getId());
-			Launcher.SEMAPHORES.get(currentLane).acquire();
+			SynchronizationFactory.SEMAPHORES.get(currentLane).acquire();
 
 			System.out.println("In " + currentLane + " | Plane: " + plane.getId());
-			Launcher.LOCKS.get(Sectors.AIRPORT).lock();
-			Launcher.PLANE_MOVEMENTS.get(plane.getId()).setPosx(currentLane.getX());
-			Launcher.PLANE_MOVEMENTS.get(plane.getId()).setPosy(currentLane.getY());
+			SynchronizationFactory.LOCKS.get(Sectors.AIRPORT).lock();
+			SynchronizationFactory.PLANE_MOVEMENTS.get(plane.getId()).setPosx(currentLane.getX());
+			SynchronizationFactory.PLANE_MOVEMENTS.get(plane.getId()).setPosy(currentLane.getY());
 			Transaction trans = session.beginTransaction();
-			session.update(Launcher.PLANE_MOVEMENTS.get(plane.getId()));
+			session.update(SynchronizationFactory.PLANE_MOVEMENTS.get(plane.getId()));
 			trans.commit();
-			Launcher.LOCKS.get(Sectors.AIRPORT).unlock();
+			SynchronizationFactory.LOCKS.get(Sectors.AIRPORT).unlock();
 			switch (currentLane) {
 			case TERMINAL1:
-				Launcher.SEMAPHORES.get(Arrival.LANDING_CURVE).release();
+				SynchronizationFactory.SEMAPHORES.get(Arrival.LANDING_CURVE).release();
 				break;
 			case TERMINAL2:
-				Launcher.SEMAPHORES.get(Arrival.TERMINAL1).release();
+				SynchronizationFactory.SEMAPHORES.get(Arrival.TERMINAL1).release();
 				break;
 			case TERMINAL3:
-				Launcher.SEMAPHORES.get(Arrival.TERMINAL2).release();
+				SynchronizationFactory.SEMAPHORES.get(Arrival.TERMINAL2).release();
 				break;
 			case TERMINAL4:
-				Launcher.SEMAPHORES.get(Arrival.TERMINAL3).release();
+				SynchronizationFactory.SEMAPHORES.get(Arrival.TERMINAL3).release();
 				break;
 			default:
-				throw new InterruptedException();
+				throw new ProblemHappenedException("Terminal wrongly introduced");
 			}
 			plane.doMovement();
 
@@ -166,7 +162,7 @@ public class ArrivalManager {
 				currentLane = Arrival.TERMINAL4;
 				break;
 			default:
-				throw new InterruptedException();
+				throw new ProblemHappenedException("Terminal wrongly introduced");
 			}
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -181,14 +177,14 @@ public class ArrivalManager {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		try {
 			Terminal ter = Terminal.getTerminal(plane.getTerminal());
-			Launcher.LOCKS.get(Sectors.AIRPORT).lock();
-			Launcher.PLANE_MOVEMENTS.get(plane.getId()).setPosx(ter.getX());
-			Launcher.PLANE_MOVEMENTS.get(plane.getId()).setPosy(ter.getY());
+			SynchronizationFactory.LOCKS.get(Sectors.AIRPORT).lock();
+			SynchronizationFactory.PLANE_MOVEMENTS.get(plane.getId()).setPosx(ter.getX());
+			SynchronizationFactory.PLANE_MOVEMENTS.get(plane.getId()).setPosy(ter.getY());
 			Transaction trans = session.beginTransaction();
-			session.update(Launcher.PLANE_MOVEMENTS.get(plane.getId()));
+			session.update(SynchronizationFactory.PLANE_MOVEMENTS.get(plane.getId()));
 			trans.commit();
-			Launcher.LOCKS.get(Sectors.AIRPORT).unlock();
-			Launcher.SEMAPHORES.get(currentLane).release();
+			SynchronizationFactory.LOCKS.get(Sectors.AIRPORT).unlock();
+			SynchronizationFactory.SEMAPHORES.get(currentLane).release();
 			plane.doMovement();
 		} catch (HibernateException e) {
 			e.printStackTrace();

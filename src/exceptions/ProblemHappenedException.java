@@ -1,5 +1,6 @@
 package exceptions;
 
+import java.io.PrintStream;
 import java.io.PrintWriter;
 
 public class ProblemHappenedException extends Exception {
@@ -16,7 +17,8 @@ public class ProblemHappenedException extends Exception {
 	
 	@Override
 	public void printStackTrace(PrintWriter s) {
-		super.printStackTrace(s);
-		s.println(message);
+		StackTraceElement[] ste = this.getStackTrace();
+		this.setStackTrace(ste);
+		super.printStackTrace();
 	}
 }
