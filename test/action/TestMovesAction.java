@@ -1,17 +1,19 @@
 package action;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.interceptor.annotations.After;
 
 import dao.MovesDAO;
 import db_items.PlaneMovements;
+import threads.SynchronizationFactory;
 import utils.HibernateUtils;
 
 public class TestMovesAction {
@@ -23,8 +25,14 @@ public class TestMovesAction {
 	@Before
 	public void initTest() {
 		HibernateUtils.start();
+		SynchronizationFactory.define();
 		movesDao = new MovesDAO();
 		movesAction = new MovesAction();
+	}
+	
+	@After
+	public void endTest() {
+		HibernateUtils.stop();
 	}
 
 
@@ -36,16 +44,19 @@ public class TestMovesAction {
 	
 	@Test
 	public void testGetMoves(){
-		List<PlaneMovements> ret = movesAction.getMoves();
-		List<PlaneMovements> valid = movesDao.list();
-		assertEquals(valid, ret);
+		movesAction.execute();
+		List<PlaneMovements> action = movesAction.getMoves();
+		List<PlaneMovements> dao = movesDao.list();
+		assertEquals(action.size(), dao.size());
 	}
-	
+		
 	@Test
-	public void testSetMoves(){
-		List<PlaneMovements> moves = new ArrayList<>();
-		movesAction.setMoves(moves);
-		assertEquals(moves, movesAction.getMoves());
+	public void testGetLastId(){
+		movesAction.execute();
+		List<PlaneMovements> moves = movesDao.list();
+		int a = moves.get(moves.size()-1).getId() + 1;
+		int b = movesAction.getLastId();
+		assertEquals(a, b);	
 	}
 
 }

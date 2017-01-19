@@ -14,8 +14,6 @@ public class MovesAction extends ActionSupport {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@SuppressWarnings("unused")
-	private List<PlaneMovements> moves;
 	private MovesDAO movesDao;
 
 	public MovesAction() {
@@ -24,7 +22,7 @@ public class MovesAction extends ActionSupport {
 
 	public String execute() {
 		if (movesDao.list() != null) {
-			this.moves = movesDao.list();
+			movesDao.list();
 			return SUCCESS;
 		}
 		return ERROR;
@@ -32,10 +30,6 @@ public class MovesAction extends ActionSupport {
 
 	public List<PlaneMovements> getMoves() {
 		return movesDao.list();
-	}
-
-	public void setMoves(List<PlaneMovements> moves) {
-		this.moves = moves;
 	}
 
 	public int getLastId() {

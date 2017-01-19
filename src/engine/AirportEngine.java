@@ -1,15 +1,7 @@
 package engine;
 
-import java.util.HashMap;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.locks.ReentrantLock;
-
 import db_items.Planes;
-import engine.Enumerated.Arrival;
-import engine.Enumerated.Departure;
-import engine.Enumerated.Sectors;
 import exceptions.ProblemHappenedException;
-import threads.Launcher;
 
 public class AirportEngine {
 
@@ -24,35 +16,6 @@ public class AirportEngine {
 	private DepartureManager departureManager;
 
 	public AirportEngine() {
-		Launcher.LOCKS = new HashMap<>();
-		Launcher.LOCKS.put(Sectors.AIRPORT, new ReentrantLock());
-
-		Launcher.SEMAPHORES = new HashMap<>();
-		
-		Launcher.SEMAPHORES.put(Sectors.AIRPORT, new Semaphore(MAX_PLANES));
-		
-		Launcher.SEMAPHORES.put(Arrival.LANDING_LANE, new Semaphore(1));
-		Launcher.SEMAPHORES.put(Arrival.LANDING_CURVE, new Semaphore(1));
-		Launcher.SEMAPHORES.put(Arrival.TERMINAL1, new Semaphore(1));
-		Launcher.SEMAPHORES.put(Arrival.TERMINAL2, new Semaphore(1));
-		Launcher.SEMAPHORES.put(Arrival.TERMINAL3, new Semaphore(1));
-		Launcher.SEMAPHORES.put(Arrival.TERMINAL4, new Semaphore(1));
-		Launcher.SEMAPHORES.put(Arrival.TERMINAL1, new Semaphore(1));
-		Launcher.SEMAPHORES.put(Arrival.TERMINAL2, new Semaphore(1));
-		Launcher.SEMAPHORES.put(Arrival.TERMINAL3, new Semaphore(1));
-		Launcher.SEMAPHORES.put(Arrival.TERMINAL4, new Semaphore(1));
-		
-		Launcher.SEMAPHORES.put(Departure.TAKE_OFF_LANE, new Semaphore(1));
-		Launcher.SEMAPHORES.put(Departure.TAKE_OFF_CURVE, new Semaphore(1));
-		Launcher.SEMAPHORES.put(Departure.TERMINAL1, new Semaphore(1));
-		Launcher.SEMAPHORES.put(Departure.TERMINAL2, new Semaphore(1));
-		Launcher.SEMAPHORES.put(Departure.TERMINAL3, new Semaphore(1));
-		Launcher.SEMAPHORES.put(Departure.TERMINAL4, new Semaphore(1));
-		Launcher.SEMAPHORES.put(Departure.TERMINAL1, new Semaphore(1));
-		Launcher.SEMAPHORES.put(Departure.TERMINAL2, new Semaphore(1));
-		Launcher.SEMAPHORES.put(Departure.TERMINAL3, new Semaphore(1));
-		Launcher.SEMAPHORES.put(Departure.TERMINAL4, new Semaphore(1));
-
 		arrivalManager = new ArrivalManager();
 		departureManager = new DepartureManager();
 
