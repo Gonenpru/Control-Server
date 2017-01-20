@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package engine;
 
 
@@ -14,11 +17,21 @@ import engine.Enumerated.Arrival;
 import threads.SynchronizationFactory;
 import utils.HibernateUtils;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TestArrivalManager.
+ */
 public class TestArrivalManager {
 
+	/** The arrival manager. */
 	public ArrivalManager arrivalManager;
+	
+	/** The plane. */
 	Planes plane;
 
+	/**
+	 * Inits the test.
+	 */
 	@Before
 	public void initTest() {
 		HibernateUtils.start();
@@ -27,17 +40,26 @@ public class TestArrivalManager {
 		plane = new Planes(5, 0, 0, 0);
 	}
 	
+	/**
+	 * End test.
+	 */
 	@After
 	public void endTest() {
 		HibernateUtils.stop();
 	}
 
+	/**
+	 * Test check airport space.
+	 */
 	@Test
 	public void testCheckAirportSpace() {
 		boolean ret = arrivalManager.checkAirportSpace(plane);
 		assertTrue(ret);
 	}
 	
+	/**
+	 * Test check landing lane.
+	 */
 	@Test
 	public void testCheckLandingLane() {
 		SynchronizationFactory.PLANE_MOVEMENTS.put(plane.getId(),
@@ -46,6 +68,9 @@ public class TestArrivalManager {
 		assertTrue(ret);
 	}
 	
+	/**
+	 * Test check landing curve.
+	 */
 	@Test
 	public void testCheckLandingCurve() {
 		SynchronizationFactory.PLANE_MOVEMENTS.put(plane.getId(),
@@ -54,6 +79,9 @@ public class TestArrivalManager {
 		assertTrue(ret);
 	}
 
+	/**
+	 * Test check terminal.
+	 */
 	@Test
 	public void testCheckTerminal(){
 		SynchronizationFactory.PLANE_MOVEMENTS.put(plane.getId(),

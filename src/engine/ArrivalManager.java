@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package engine;
 
 import org.hibernate.HibernateException;
@@ -14,14 +17,28 @@ import exceptions.ProblemHappenedException;
 import threads.SynchronizationFactory;
 import utils.HibernateUtils;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ArrivalManager.
+ */
 public class ArrivalManager {
 
+	/** The moves action. */
 	private MovesAction movesAction;
 
+	/**
+	 * Instantiates a new arrival manager.
+	 */
 	public ArrivalManager() {
 		movesAction = new MovesAction();
 	}
 
+	/**
+	 * Check airport space.
+	 *
+	 * @param plane the plane
+	 * @return true, if successful
+	 */
 	public boolean checkAirportSpace(Planes plane) {
 		int id;
 		Session session = HibernateUtils.getSessionFactory().openSession();
@@ -49,6 +66,12 @@ public class ArrivalManager {
 		return true;
 	}
 
+	/**
+	 * Check landing lane.
+	 *
+	 * @param plane the plane
+	 * @return true, if successful
+	 */
 	public boolean checkLandingLane(Planes plane) {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		try {
@@ -75,6 +98,12 @@ public class ArrivalManager {
 		return true;
 	}
 
+	/**
+	 * Check landing curve.
+	 *
+	 * @param plane the plane
+	 * @return true, if successful
+	 */
 	public boolean checkLandingCurve(Planes plane) {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		try {
@@ -101,6 +130,12 @@ public class ArrivalManager {
 		return true;
 	}
 
+	/**
+	 * Check terminal.
+	 *
+	 * @param plane the plane
+	 * @return true, if successful
+	 */
 	public boolean checkTerminal(Planes plane) {
 		try {
 			System.out.println(
@@ -111,6 +146,15 @@ public class ArrivalManager {
 		return true;
 	}
 
+	/**
+	 * Checks if is planes terminal.
+	 *
+	 * @param currentLane the current lane
+	 * @param plane the plane
+	 * @return the int
+	 * @throws InterruptedException the interrupted exception
+	 * @throws ProblemHappenedException the problem happened exception
+	 */
 	private int isPlanesTerminal(Arrival currentLane, Planes plane)
 			throws InterruptedException, ProblemHappenedException {
 		Session session = HibernateUtils.getSessionFactory().openSession();
@@ -173,6 +217,13 @@ public class ArrivalManager {
 		return isPlanesTerminal(currentLane, plane);
 	}
 
+	/**
+	 * Park plane.
+	 *
+	 * @param plane the plane
+	 * @param currentLane the current lane
+	 * @throws InterruptedException the interrupted exception
+	 */
 	private void parkPlane(Planes plane, Arrival currentLane) throws InterruptedException {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		try {

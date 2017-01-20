@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package threads;
 
 import java.util.Random;
@@ -7,18 +10,33 @@ import java.util.concurrent.Executors;
 import db_items.Planes;
 import utils.HibernateUtils;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Launcher.
+ */
 public class Launcher {
 
-	public static ExecutorService threadPool;
+	/** The thread pool. */
+	final public static ExecutorService threadPool = Executors.newCachedThreadPool();
 	
+	/** The rnd. */
 	private Random rnd;
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		new Launcher(9);
 	}
 
+	/**
+	 * Instantiates a new launcher.
+	 *
+	 * @param planeAmmount the plane ammount
+	 */
 	public Launcher(int planeAmmount) {
-		threadPool = Executors.newCachedThreadPool();
 		SynchronizationFactory.define();
 		try {
 			HibernateUtils.start();

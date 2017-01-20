@@ -1,26 +1,48 @@
+/*
+ * 
+ */
 package engine;
 
 import db_items.Planes;
 import exceptions.ProblemHappenedException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AirportEngine.
+ */
 public class AirportEngine {
 
+	/** The Constant MAX_PLANES. */
 	/* Finals */
 	public final static int MAX_PLANES = 6;
+	
+	/** The Constant TOT_TERMINAL. */
 	public final static int TOT_TERMINAL = 4;
 
 	/* Statics */
 
+	/** The arrival manager. */
 	/* Variables */
 	private ArrivalManager arrivalManager;
+	
+	/** The departure manager. */
 	private DepartureManager departureManager;
 
+	/**
+	 * Instantiates a new airport engine.
+	 */
 	public AirportEngine() {
 		arrivalManager = new ArrivalManager();
 		departureManager = new DepartureManager();
 
 	}
 
+	/**
+	 * Land.
+	 *
+	 * @param plane the plane
+	 * @return the int
+	 */
 	public synchronized int land(Planes plane) {
 		try {
 			if (!arrivalManager.checkAirportSpace(plane))
@@ -40,6 +62,12 @@ public class AirportEngine {
 		return 0;
 	}
 
+	/**
+	 * Take off.
+	 *
+	 * @param plane the plane
+	 * @return the int
+	 */
 	public synchronized int takeOff(Planes plane) {
 		try {
 			if (!departureManager.checkTerminal(plane))
