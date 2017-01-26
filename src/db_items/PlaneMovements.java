@@ -21,10 +21,12 @@ public class PlaneMovements implements java.io.Serializable {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	
-	/** The Constant OUT. */
-	private static final int IN = 0, OUT = 1;
+	/** The Constant IN for when the plane is on the airport. */
+	private static final int IN = 0, 
+	/** The Constant OUT for when the plane leaves the airport. */
+			OUT = 1;
 
-	/** The id. */
+	/** The movement id. */
 	@Id
 	@Column(name="id")
 	private int id;
@@ -33,15 +35,15 @@ public class PlaneMovements implements java.io.Serializable {
 	@Column(name="plane_id")
 	private int plane_id;
 	
-	/** The posx. */
+	/** The X coordinate. */
 	@Column(name="posx")
 	private Double posx;
 	
-	/** The posy. */
+	/** The Y coordinate. */
 	@Column(name="posy")
 	private Double posy;
 	
-	/** The out. */
+	/** Indicates when a plane leaves the airport. */
 	@Column(name="out")
 	private int out;
 
@@ -52,7 +54,7 @@ public class PlaneMovements implements java.io.Serializable {
 	}
 
 	/**
-	 * Instantiates a new plane movements.
+	 * Instantiates a new plane movement with a certain id and plane.
 	 *
 	 * @param id the id
 	 * @param plane_id the plane id
@@ -64,12 +66,12 @@ public class PlaneMovements implements java.io.Serializable {
 	}
 
 	/**
-	 * Instantiates a new plane movements.
+	 * Instantiates a new plane movement with a certain id, plane and position coordinates
 	 *
 	 * @param id the id
 	 * @param plane_id the plane id
-	 * @param posx the posx
-	 * @param posy the posy
+	 * @param posx the X coordinate
+	 * @param posy the Y coordinate
 	 */
 	public PlaneMovements(int id, int plane_id, Double posx, Double posy) {
 		this.id = id;
@@ -98,54 +100,54 @@ public class PlaneMovements implements java.io.Serializable {
 	}
 
 	/**
-	 * Gets the planes.
+	 * Gets the plane id.
 	 *
-	 * @return the planes
+	 * @return the plane id
 	 */
 	public int getPlanes() {
 		return this.plane_id;
 	}
 
 	/**
-	 * Sets the planes.
+	 * Sets the plane id.
 	 *
-	 * @param plane_id the new planes
+	 * @param plane_id the new plane id
 	 */
 	public void setPlanes(int plane_id) {
 		this.plane_id = plane_id;
 	}
 
 	/**
-	 * Gets the posx.
+	 * Gets the X coordinate.
 	 *
-	 * @return the posx
+	 * @return the X coordinate
 	 */
 	public Double getPosx() {
 		return this.posx;
 	}
 
 	/**
-	 * Sets the posx.
+	 * Sets the X coordinate.
 	 *
-	 * @param posx the new posx
+	 * @param posx the new X coordinate
 	 */
 	public void setPosx(Double posx) {
 		this.posx = posx;
 	}
 
 	/**
-	 * Gets the posy.
+	 * Gets the Y coordinate.
 	 *
-	 * @return the posy
+	 * @return the Y coordinate
 	 */
 	public Double getPosy() {
 		return this.posy;
 	}
 
 	/**
-	 * Sets the posy.
+	 * Sets the Y coordinate.
 	 *
-	 * @param posy the new posy
+	 * @param posy the new Y coordinate
 	 */
 	public void setPosy(Double posy) {
 		this.posy = posy;
@@ -161,7 +163,7 @@ public class PlaneMovements implements java.io.Serializable {
 	}
 	
 	/**
-	 * Sets the out.
+	 * Sets if the plane is out.
 	 */
 	public void setOut() {
 		this.out = OUT;

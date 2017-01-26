@@ -14,19 +14,19 @@ import engine.Enumerated.Terminal;
 import threads.SynchronizationFactory;
 import utils.HibernateUtils;
 
-// TODO: Auto-generated Javadoc
+
 /**
- * The Class DepartureManager.
+ * The Class DepartureManager has the functions related to departures.
  */
 public class DepartureManager {
 
-	/** The Constant NONE. */
+	/** The Constant NONE is used to represent no tickets on the semaphore. */
 	private final static int NONE = 0;
 
 	/**
-	 * Check terminal.
+	 * Check terminal takes the plane from the correct terminal.
 	 *
-	 * @param plane the plane
+	 * @param plane the plane to redirect
 	 * @return true, if successful
 	 */
 	public boolean checkTerminal(Planes plane) {
@@ -48,7 +48,7 @@ public class DepartureManager {
 	}
 
 	/**
-	 * Terminal 1.
+	 * Takes the plane form terminal 1.
 	 *
 	 * @param plane the plane
 	 * @throws InterruptedException the interrupted exception
@@ -88,7 +88,7 @@ public class DepartureManager {
 	}
 
 	/**
-	 * Terminal 2.
+	 * Takes the plane form terminal  2.
 	 *
 	 * @param plane the plane
 	 * @throws InterruptedException the interrupted exception
@@ -135,7 +135,7 @@ public class DepartureManager {
 	}
 
 	/**
-	 * Terminal 3.
+	 * Takes the plane form terminal  3.
 	 *
 	 * @param plane the plane
 	 * @throws InterruptedException the interrupted exception
@@ -184,7 +184,7 @@ public class DepartureManager {
 	}
 
 	/**
-	 * Terminal 4.
+	 * Takes the plane form terminal  4.
 	 *
 	 * @param plane the plane
 	 * @throws InterruptedException the interrupted exception
@@ -233,7 +233,7 @@ public class DepartureManager {
 	}
 
 	/**
-	 * Check take off curve.
+	 * Takes the plane from the take off curve.
 	 *
 	 * @param plane the plane
 	 * @return true, if successful
@@ -267,7 +267,7 @@ public class DepartureManager {
 	}
 
 	/**
-	 * Check take off lane.
+	 * Takes the plane from the take off lane.
 	 *
 	 * @param plane the plane
 	 * @return true, if successful
@@ -301,7 +301,7 @@ public class DepartureManager {
 	}
 
 	/**
-	 * Check airport space.
+	 * Deletes the plane from the airport.
 	 *
 	 * @param plane the plane
 	 * @return true, if successful

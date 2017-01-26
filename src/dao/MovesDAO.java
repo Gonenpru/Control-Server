@@ -11,16 +11,15 @@ import org.hibernate.Session;
 import db_items.PlaneMovements;
 import utils.HibernateUtils;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class MovesDAO.
+ * The Class with queries related to Moves
  */
 public class MovesDAO extends HibernateUtils {
 
 	/**
-	 * List.
+	 * Takes the plane list from the database.
 	 *
-	 * @return the list
+	 * @return the list with planes in ascendent order by id.
 	 */
 	@SuppressWarnings("unchecked")
 	public List<PlaneMovements> list() {

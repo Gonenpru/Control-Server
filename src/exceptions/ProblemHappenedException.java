@@ -20,14 +20,16 @@ public class ProblemHappenedException extends Exception {
 	/**
 	 * Instantiates a new problem happened exception.
 	 *
-	 * @param msg the msg
+	 * @param msg the message to print
 	 */
 	public ProblemHappenedException(String msg) {
 		this.message = msg;
 	}
 	
-	/* (non-Javadoc)
-	 * @see java.lang.Throwable#printStackTrace(java.io.PrintWriter)
+	/**
+	 * Prints this throwable and its backtrace to the specified print writer.
+	 * 
+	 * @param s PrintWriter to use for output
 	 */
 	@Override
 	public void printStackTrace(PrintWriter s) {

@@ -12,14 +12,13 @@ import utils.HibernateUtils;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Launcher.
+ * The main is in this class.
  */
 public class Launcher {
 
 	/** The thread pool. */
 	final public static ExecutorService threadPool = Executors.newCachedThreadPool();
 	
-	/** The rnd. */
 	private Random rnd;
 
 	/**
@@ -32,16 +31,16 @@ public class Launcher {
 	}
 
 	/**
-	 * Instantiates a new launcher.
+	 * Constructor of launcher.
 	 *
-	 * @param planeAmmount the plane ammount
+	 * @param planeAmount the amount of planes that will pass through the airport
 	 */
-	public Launcher(int planeAmmount) {
+	public Launcher(int planeAmount) {
 		SynchronizationFactory.define();
 		try {
 			HibernateUtils.start();
 			rnd = new Random();
-			for (int i = 1; i <= planeAmmount; i++){
+			for (int i = 1; i <= planeAmount; i++){
 				threadPool.submit(new Thread(new Planes(i, 0, 0, 0)));
 				Thread.sleep((rnd.nextInt(10)+11)*1000);
 			}

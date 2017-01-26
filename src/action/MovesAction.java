@@ -10,16 +10,15 @@ import com.opensymphony.xwork2.ActionSupport;
 import dao.MovesDAO;
 import db_items.PlaneMovements;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class MovesAction.
  */
 public class MovesAction extends ActionSupport {
 
-	/** The Constant serialVersionUID. */
+	/** The Constant serialVersionUID to avoid warnings. */
 	private static final long serialVersionUID = 1L;
 
-	/** The moves dao. */
+	/** The DAO to moves. */
 	private MovesDAO movesDao;
 
 	/**
@@ -29,8 +28,9 @@ public class MovesAction extends ActionSupport {
 		movesDao = new MovesDAO();
 	}
 
-	/* (non-Javadoc)
-	 * @see com.opensymphony.xwork2.ActionSupport#execute()
+	/**
+	 * A default implementation that does nothing an returns "success".
+	 * @return "success", if correct
 	 */
 	public String execute() {
 		if (movesDao.list() != null) {
@@ -41,7 +41,7 @@ public class MovesAction extends ActionSupport {
 	}
 
 	/**
-	 * Gets the moves.
+	 * Gets the list of moves from the MovesDAO.
 	 *
 	 * @return the moves
 	 */
@@ -50,14 +50,14 @@ public class MovesAction extends ActionSupport {
 	}
 
 	/**
-	 * Gets the last id.
+	 * Gets the last id of moves.
 	 *
-	 * @return the last id
+	 * @return the last ID
 	 */
 	public int getLastId() {
-		int i = 0;
+		int id = 0;
 		List<PlaneMovements> moves = this.getMoves();
-		i = moves.get(moves.size()-1).getId() + 1;
-		return i;
+		id = moves.get(moves.size()-1).getId() + 1;
+		return id;
 	}
 }

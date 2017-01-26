@@ -36,7 +36,7 @@ public class TestDepartureManager {
 		HibernateUtils.start();
 		SynchronizationFactory.define();
 		departureManager = new DepartureManager();
-		plane = new Planes(1, 0, 0, 0);
+		plane = new Planes(4, 0, 0, 0);
 
 		SynchronizationFactory.PLANE_MOVEMENTS.put(plane.getId(),
 				new PlaneMovements(plane.getId(), plane.getId(), Arrival.AIRPORT.getX(), Arrival.AIRPORT.getY()));

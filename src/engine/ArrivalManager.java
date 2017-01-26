@@ -17,9 +17,8 @@ import exceptions.ProblemHappenedException;
 import threads.SynchronizationFactory;
 import utils.HibernateUtils;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ArrivalManager.
+ * The Class ArrivalManager has the functions related to arrivals.
  */
 public class ArrivalManager {
 
@@ -34,10 +33,11 @@ public class ArrivalManager {
 	}
 
 	/**
-	 * Check airport space.
+	 * Checks if there is space in the airport.
+	 * It will freeze the thread until it gets free.
 	 *
-	 * @param plane the plane
-	 * @return true, if successful
+	 * @param plane the plane entering the airport
+	 * @return true, if there is
 	 */
 	public boolean checkAirportSpace(Planes plane) {
 		int id;
@@ -67,10 +67,11 @@ public class ArrivalManager {
 	}
 
 	/**
-	 * Check landing lane.
+	 * Checks if landing lane is free.
+	 * It will freeze the thread until it gets free.
 	 *
-	 * @param plane the plane
-	 * @return true, if successful
+	 * @param plane the plane entering the airport
+	 * @return true, if there is
 	 */
 	public boolean checkLandingLane(Planes plane) {
 		Session session = HibernateUtils.getSessionFactory().openSession();
@@ -99,10 +100,11 @@ public class ArrivalManager {
 	}
 
 	/**
-	 * Check landing curve.
+	 * Checks if the landing curve is free.
+	 * It will freeze the thread until it gets free.
 	 *
-	 * @param plane the plane
-	 * @return true, if successful
+	 * @param plane the plane entering the airport
+	 * @return true, if there is
 	 */
 	public boolean checkLandingCurve(Planes plane) {
 		Session session = HibernateUtils.getSessionFactory().openSession();
@@ -131,9 +133,9 @@ public class ArrivalManager {
 	}
 
 	/**
-	 * Check terminal.
+	 * Calls the parking function to the plane.
 	 *
-	 * @param plane the plane
+	 * @param plane the plane to park
 	 * @return true, if successful
 	 */
 	public boolean checkTerminal(Planes plane) {
@@ -147,11 +149,11 @@ public class ArrivalManager {
 	}
 
 	/**
-	 * Checks if is planes terminal.
+	 * Checks if is planes terminal and lands it, if not, recursively calls himself.
 	 *
 	 * @param currentLane the current lane
 	 * @param plane the plane
-	 * @return the int
+	 * @return the plane terminal
 	 * @throws InterruptedException the interrupted exception
 	 * @throws ProblemHappenedException the problem happened exception
 	 */
@@ -218,7 +220,7 @@ public class ArrivalManager {
 	}
 
 	/**
-	 * Park plane.
+	 * Parks the plane plane.
 	 *
 	 * @param plane the plane
 	 * @param currentLane the current lane

@@ -31,7 +31,7 @@ public class SynchronizationFactory {
 	final public static HashMap<Integer, PlaneMovements> PLANE_MOVEMENTS  = new HashMap<>();
 	
 	/**
-	 * Define.
+	 * Initializes all the statics needed.
 	 */
 	public static void define() {
 		SynchronizationFactory.LOCKS.put(Sectors.AIRPORT, new ReentrantLock());		

@@ -3,42 +3,41 @@
  */
 package engine;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Enumerated.
+ * Class containing the enumerates that define the layout of the airport.
  */
 public class Enumerated {
-	
+
 	/**
-	 * The Enum Arrival.
+	 * The Arrival lane.
 	 */
 	public enum Arrival {
-		
-		/** The airport. */
-		AIRPORT(51.477529, -0.490220), 
- /** The terminal1. */
- TERMINAL1(51.475851, -0.446425), 
- /** The terminal2. */
- TERMINAL2(51.475851, -0.457461), 
- /** The terminal3. */
- TERMINAL3(
-				51.475851, -0.469114), 
- /** The terminal4. */
- TERMINAL4(51.475851,
-						-0.480882), 
- /** The landing curve. */
- LANDING_CURVE(51.475851, -0.436008), 
- /** The landing lane. */
- LANDING_LANE(51.477529, -0.433933);
 
-		/** The y. */
+		/** The airport. */
+		AIRPORT(51.477529, -0.490220),
+		/** The terminal1. */
+		TERMINAL1(51.475851, -0.446425),
+		/** The terminal2. */
+		TERMINAL2(51.475851, -0.457461),
+		/** The terminal3. */
+		TERMINAL3(51.475851, -0.469114),
+		/** The terminal4. */
+		TERMINAL4(51.475851, -0.480882),
+		/** The landing curve. */
+		LANDING_CURVE(51.475851, -0.436008),
+		/** The landing lane. */
+		LANDING_LANE(51.477529, -0.433933);
+
+		/** The coordinates */
 		private final double x, y;
 
 		/**
 		 * Instantiates a new arrival.
 		 *
-		 * @param x the x
-		 * @param y the y
+		 * @param x
+		 *            the x coordinate
+		 * @param y
+		 *            the y coordinate
 		 */
 		Arrival(double x, double y) {
 			this.x = x;
@@ -46,18 +45,18 @@ public class Enumerated {
 		}
 
 		/**
-		 * Gets the x.
+		 * Gets the x coordinate.
 		 *
-		 * @return the x
+		 * @return the x coordinate
 		 */
 		double getX() {
 			return this.x;
 		}
 
 		/**
-		 * Gets the y.
+		 * Gets the y coordinate.
 		 *
-		 * @return the y
+		 * @return the y coordinate
 		 */
 		double getY() {
 			return this.y;
@@ -65,36 +64,35 @@ public class Enumerated {
 	}
 
 	/**
-	 * The Enum Terminal.
+	 * The Terminals.
 	 */
 	public enum Terminal {
-		
-		/** The t1. */
-		T1(51.472011, -0.442705), 
- /** The p T 1. */
- pT1(51.467497, -0.445614), 
- /** The t2. */
- T2(51.471947, -0.453759), 
- /** The p T 2. */
- pT2(51.467497, -0.457162), 
- /** The t3. */
- T3(
-				51.471597, -0.465530), 
- /** The p T 3. */
- pT3(51.467497, -0.468695), 
- /** The t4. */
- T4(51.471501, -0.477352), 
- /** The p T 4. */
- pT4(51.467497, -0.481082);
 
-		/** The y. */
+		/** The t1. */
+		T1(51.472011, -0.442705),
+		/** The pre T 1. */
+		pT1(51.467497, -0.445614),
+		/** The t2. */
+		T2(51.471947, -0.453759),
+		/** The pre T 2. */
+		pT2(51.467497, -0.457162),
+		/** The t3. */
+		T3(51.471597, -0.465530),
+		/** The pre T 3. */
+		pT3(51.467497, -0.468695),
+		/** The t4. */
+		T4(51.471501, -0.477352),
+		/** The pre T 4. */
+		pT4(51.467497, -0.481082);
+
+		/** The coordinates. */
 		private final double x, y;
 
 		/**
 		 * Instantiates a new terminal.
 		 *
-		 * @param x the x
-		 * @param y the y
+		 * @param x the x coordinate
+		 * @param y the y coordinate
 		 */
 		Terminal(double x, double y) {
 			this.x = x;
@@ -102,32 +100,32 @@ public class Enumerated {
 		}
 
 		/**
-		 * Gets the x.
+		 * Gets the x coordinate.
 		 *
-		 * @return the x
+		 * @return the x coordinate
 		 */
 		double getX() {
 			return this.x;
 		}
 
 		/**
-		 * Gets the y.
+		 * Gets the y coordinate.
 		 *
-		 * @return the y
+		 * @return the y coordinate
 		 */
 		double getY() {
 			return this.y;
 		}
 
 		/**
-		 * Gets the terminal.
+		 * Gets the terminal enumerate.
 		 *
-		 * @param a the a
-		 * @return the terminal
+		 * @param terminal  the terminal number
+		 * @return the terminal enum
 		 */
-		public static Terminal getTerminal(int a) {
+		public static Terminal getTerminal(int terminal) {
 			Terminal r;
-			switch (a) {
+			switch (terminal) {
 			case 1:
 				r = Terminal.T1;
 				break;
@@ -145,14 +143,14 @@ public class Enumerated {
 		}
 
 		/**
-		 * Gets the p terminal.
+		 * Gets the pre terminal enumerate.
 		 *
-		 * @param a the a
-		 * @return the p terminal
+		 * @param terminal the terminal number
+		 * @return the terminal enum
 		 */
-		public static Terminal getpTerminal(int a) {
+		public static Terminal getpTerminal(int terminal) {
 			Terminal r;
-			switch (a) {
+			switch (terminal) {
 			case 1:
 				r = Terminal.pT1;
 				break;
@@ -171,35 +169,35 @@ public class Enumerated {
 	}
 
 	/**
-	 * The Enum Departure.
+	 * The Departure lanes.
 	 */
 	public enum Departure {
-		
-		/** The airport. */
-		AIRPORT(51.467290, -0.434884), 
- /** The terminal1. */
- TERMINAL1(51.467497, -0.457162), 
- /** The terminal2. */
- TERMINAL2(51.467497, -0.468695), 
- /** The terminal3. */
- TERMINAL3(
-				51.467497, -0.481082), 
- /** The terminal4. */
- TERMINAL4(51.467387,
-						-0.487393), 
- /** The take off curve. */
- TAKE_OFF_CURVE(51.464816, -0.487393), 
- /** The take off lane. */
- TAKE_OFF_LANE(51.465088, -0.396408);
 
-		/** The y. */
+		/** The airport. */
+		AIRPORT(51.467290, -0.434884),
+		/** The terminal1. */
+		TERMINAL1(51.467497, -0.457162),
+		/** The terminal2. */
+		TERMINAL2(51.467497, -0.468695),
+		/** The terminal3. */
+		TERMINAL3(51.467497, -0.481082),
+		/** The terminal4. */
+		TERMINAL4(51.467387, -0.487393),
+		/** The take off curve. */
+		TAKE_OFF_CURVE(51.464816, -0.487393),
+		/** The take off lane. */
+		TAKE_OFF_LANE(51.465088, -0.396408);
+
+		/** The coordinates. */
 		private final double x, y;
 
 		/**
 		 * Instantiates a new departure.
 		 *
-		 * @param x the x
-		 * @param y the y
+		 * @param x
+		 *            the x coordinate
+		 * @param y
+		 *            the y coordinate
 		 */
 		Departure(double x, double y) {
 			this.x = x;
@@ -207,18 +205,18 @@ public class Enumerated {
 		}
 
 		/**
-		 * Gets the x.
+		 * Gets the x coordinate.
 		 *
-		 * @return the x
+		 * @return the x coordinate
 		 */
 		double getX() {
 			return this.x;
 		}
 
 		/**
-		 * Gets the y.
+		 * Gets the y coordinate.
 		 *
-		 * @return the y
+		 * @return the y coordinate
 		 */
 		double getY() {
 			return this.y;
@@ -226,23 +224,24 @@ public class Enumerated {
 	}
 
 	/**
-	 * The Enum Sectors.
+	 * The Sectors.
 	 */
 	public enum Sectors {
-		
+
 		/** The departure. */
-		DEPARTURE, 
- /** The arrival. */
- ARRIVAL, 
- /** The airport. */
- AIRPORT
+		DEPARTURE,
+		/** The arrival. */
+		ARRIVAL,
+		/** The airport. */
+		AIRPORT
 	}
 
 	/**
-	 * Int to enum arrival.
+	 * Int to enumerate arrival.
 	 *
-	 * @param a the a
-	 * @return the arrival
+	 * @param a
+	 *            the number
+	 * @return the arrival enumerate
 	 */
 	public static Arrival intToEnum_Arrival(int a) {
 		Arrival r;
@@ -272,10 +271,11 @@ public class Enumerated {
 	}
 
 	/**
-	 * Int to enum departure.
+	 * Int to enumerate departure.
 	 *
-	 * @param d the d
-	 * @return the departure
+	 * @param d
+	 *            the nuber
+	 * @return the departure enum
 	 */
 	public static Departure intToEnum_Departure(int d) {
 		Departure r;

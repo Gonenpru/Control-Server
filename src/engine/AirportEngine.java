@@ -6,30 +6,29 @@ package engine;
 import db_items.Planes;
 import exceptions.ProblemHappenedException;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class AirportEngine.
+ * The class AirportEngine takes a plane through the airport.
  */
 public class AirportEngine {
 
-	/** The Constant MAX_PLANES. */
 	/* Finals */
+	/** Maximum planes on the airport. */
 	public final static int MAX_PLANES = 6;
 	
-	/** The Constant TOT_TERMINAL. */
+	/** Total amount of terminals. */
 	public final static int TOT_TERMINAL = 4;
 
 	/* Statics */
-
-	/** The arrival manager. */
+	
 	/* Variables */
+	/** The arrival manager. */
 	private ArrivalManager arrivalManager;
 	
 	/** The departure manager. */
 	private DepartureManager departureManager;
 
 	/**
-	 * Instantiates a new airport engine.
+	 * Initiates the variables.
 	 */
 	public AirportEngine() {
 		arrivalManager = new ArrivalManager();
@@ -38,10 +37,10 @@ public class AirportEngine {
 	}
 
 	/**
-	 * Land.
+	 * Guides a plane through the landing stage until the terminal he is defined
 	 *
 	 * @param plane the plane
-	 * @return the int
+	 * @return 0, if everything is right
 	 */
 	public synchronized int land(Planes plane) {
 		try {
@@ -63,10 +62,10 @@ public class AirportEngine {
 	}
 
 	/**
-	 * Take off.
+	 * Guides a plane through the take of stage from the terminal it is.
 	 *
 	 * @param plane the plane
-	 * @return the int
+	 * @return 0, if everything is right
 	 */
 	public synchronized int takeOff(Planes plane) {
 		try {
